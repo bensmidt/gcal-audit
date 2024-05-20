@@ -172,23 +172,13 @@ def print_analysis(categories: dict):
     print(title)
     print(f"+{'-' * (len(title)-2)}+")
     # data
-    total_duration = 0
     for event_type, seconds in categories.items():
-        total_duration += seconds
         minutes = seconds // SECS_IN_MINUTE
         hours = minutes // MINUTES_IN_HOUR
         minutes = minutes % MINUTES_IN_HOUR
         duration = f"{int(hours)}:{int(minutes):02d}"
         percent_of_day = f"{round((seconds / SECS_IN_DAY) * 100, 2)}"
         print(f"| {event_type:{event_type_max_len}} | {duration:^8} | {percent_of_day:^8} |")
-    print(f"+{'-' * (len(title)-2)}+")
-    # total
-    minutes = total_duration // SECS_IN_MINUTE
-    hours = minutes // MINUTES_IN_HOUR
-    minutes = minutes % MINUTES_IN_HOUR
-    duration = f"{int(hours)}:{int(minutes):02d}"
-    percent_of_day = f"{round((total_duration / SECS_IN_DAY) * 100, 2)}"
-    print(f"| {'Total':{event_type_max_len}} | {duration:^8} | {percent_of_day:^8} |")
     print(f"+{'-' * (len(title)-2)}+")
 
 
