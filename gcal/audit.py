@@ -11,17 +11,64 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-DEBUG = True
 SECS_IN_DAY = 86400
 SECS_IN_MINUTE = 60
 MINUTES_IN_HOUR = 60
 # If modifying these scopes, delete the file token.json.
 SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
+DAYS_OF_WEEK = [
+    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+]
+
+
+class DateInputter:
+
+    def input_day(self) -> tuple[datetime, datetime]:
+        date = input("Enter the day (YYYY-MM-DD). Press Enter for today:\n")
+        if not date:
+            date = datetime.now().strftime("%Y-%m-%d")
+        start_datetime = date + "T00:00:00-05:00"
+        end_datetime = date + "T23:59:59-05:00"
+        return (
+            datetime.fromisoformat(start_datetime), datetime.fromisoformat(end_datetime)
+        )
+
+    def input_week(self) -> tuple[datetime, datetime]:
+        date = input(
+            "Enter the start day (YYYY-MM-DD) of the week. Press Enter for today:\n"
+        )
+        if not date:
+            date = datetime.now().strftime("%Y-%m-%d")
+        start_datetime = date + "T00:00:00-05:00"
+        date_obj = datetime.fromisoformat(date) + timedelta(days=6)
+        end_datetime = date_obj.strftime("%Y-%m-%d") + "T23:59:59-05:00"
+        return (
+            datetime.fromisoformat(start_datetime), datetime.fromisoformat(end_datetime)
+        )
+
+    def input_datetime_range(self) -> tuple[datetime, datetime]:
+        start_date = input("Enter the start day (YYYY-MM-DD). Press Enter for today:\n")
+        if not start_date:
+            start_date = datetime.now().strftime("%Y-%m-%d")
+        start_time = input("Enter the start time (HH:MM): ")
+        if not start_time:
+            start_time = "00:00"
+        end_date = input("Enter the end date (YYYY-MM-DD): ")
+        if not end_date:
+            end_date = start_date
+        end_time = input("Enter the end time (HH:MM): ")
+        if not end_time:
+            end_time = "23:59"
+        start_datetime = f"{start_date}T{start_time}:00-05:00"
+        end_datetime = f"{end_date}T{end_time}:00-05:00"
+        return (
+            datetime.fromisoformat(start_datetime), datetime.fromisoformat(end_datetime)
+        )
 
 
 class GCalAuditor:
 
-    def __init__(self, audit_first_tag_only: bool = False):
+    def __init__(self):
         """Initialize the Google Calendar Auditor.
 
         Parameters
@@ -29,8 +76,9 @@ class GCalAuditor:
         audit_first_tag_only: bool
             Whether to audit only the first tag in the event description.
         """
-        self._audit_first_tag_only = audit_first_tag_only
+        self._audit_first_tag_only = None
         self._total_duration = None
+        self._date_inputter = DateInputter()
 
     def authenticate_user(self) -> Credentials:
         """
@@ -59,23 +107,22 @@ class GCalAuditor:
                     token.write(creds.to_json())
         return creds
 
-    def query_events(self, start_date: str, end_date: str) -> list[dict]:
+    def query_events(
+        self, start_datetime: datetime, end_datetime: datetime
+    ) -> list[dict]:
         """
         Query the user's calendar for events on a specific date.
         """
-        start_datetime = datetime.fromisoformat(start_date)
-        end_datetime = datetime.fromisoformat(end_date)
         self._total_duration = (end_datetime - start_datetime).total_seconds()
         creds = self.authenticate_user()
         try:
             service = build("calendar", "v3", credentials=creds)
-
             events_result = (
                 service.events()
                 .list(
                     calendarId="primary",
-                    timeMin=start_date,
-                    timeMax=end_date,
+                    timeMin=start_datetime.strftime("%Y-%m-%d") + "T00:00:00-05:00",
+                    timeMax=end_datetime.strftime("%Y-%m-%d") + "T23:59:59-05:00",
                     singleEvents=True,
                     orderBy="startTime",
                     fields="items(start, end, summary, description)",
@@ -83,34 +130,20 @@ class GCalAuditor:
             )
             events = events_result.get("items", [])
 
-            if DEBUG:
-                for event in events:
-                    start_datetime = datetime.fromisoformat(event["start"]["dateTime"])
-                    end_datetime = datetime.fromisoformat(event["end"]["dateTime"])
-                    logging.debug("{}:{:02d}-{}:{:02d} {}".format(
-                        start_datetime.hour % 12, start_datetime.minute,
-                        end_datetime.hour % 12, end_datetime.minute, event["summary"]))
+            for event in events:
+                event["start"]["dateTime"] = datetime.fromisoformat(
+                    event["start"]["dateTime"]
+                )
+                event["end"]["dateTime"] = datetime.fromisoformat(
+                    event["end"]["dateTime"]
+                )
+                logging.debug("{}:{:02d}-{}:{:02d} {}".format(
+                    start_datetime.hour % 12, start_datetime.minute,
+                    end_datetime.hour % 12, end_datetime.minute, event["summary"]))
             return events
 
         except HttpError as error:
             logging.error(f"An error occurred: {error}")
-
-    def extract_duration(self, event: dict) -> timedelta:
-        """Extract the duration of an event in seconds.
-
-        Parameters
-        ----------
-        event: dict
-            The event to extract the duration from.
-
-        Returns
-        -------
-        timedelta
-            The duration of the event.
-        """
-        datetime_start = datetime.fromisoformat(event["start"]["dateTime"])
-        datetime_end = datetime.fromisoformat(event["end"]["dateTime"])
-        return datetime_end - datetime_start
 
     def extract_event_categories(self, event: dict) -> list[str]:
         """Extract the event categories from the event.
@@ -159,7 +192,9 @@ class GCalAuditor:
         durations = {}
         for event in events:
             event_types = self.extract_event_categories(event)
-            event_duration = self.extract_duration(event).total_seconds()
+            event_duration = (
+                (event["end"]["dateTime"] - event["start"]["dateTime"])
+            ).total_seconds()
             for event_type in event_types:
                 durations.update({
                     event_type: durations.get(event_type, 0) + event_duration
@@ -197,7 +232,7 @@ class GCalAuditor:
             hours = minutes // MINUTES_IN_HOUR
             minutes = minutes % MINUTES_IN_HOUR
             duration = f"{int(hours)}:{int(minutes):02d}"
-            percent_of_total = f"{round((seconds / self._total_duration) * 100, 2)}"
+            percent_of_total = f"{round((seconds / self._total_duration) * 100, 2):.2f}"
             col1 = f"{event_type:^{event_type_max_len}}"
             col2 = f"{duration:^8}"
             col3 = f"{percent_of_total:^10}"
@@ -209,18 +244,69 @@ class GCalAuditor:
             hours = minutes // MINUTES_IN_HOUR
             minutes = minutes % MINUTES_IN_HOUR
             duration = f"{int(hours)}:{int(minutes):02d}"
-            percent_of_total = round((tracked_duration / self._total_duration) * 100, 2)
+            percent_of_total = (
+                f"{round((tracked_duration / self._total_duration) * 100, 2):.2f}"
+            )
             col1 = f"{'Total':^{event_type_max_len}}"
             col2 = f"{duration:^8}"
             col3 = f"{percent_of_total:^10}"
             print(f"| {col1} | {col2} | {col3} |")
             print(f"+{'-' * (len(title)-2)}+")
 
+    def set_tag_option(self):
+        # audit the first tag only
+        print("audit the first tag only?")
+        audit_first_tag_only = input("Enter y/n: ")
+        if audit_first_tag_only.lower() in ["yes", "y"]:
+            self._audit_first_tag_only = True
+        else:
+            self._audit_first_tag_only = False
 
-class DateInputter:
+    def _audit(self, start_datetime: datetime, end_datetime: datetime):
+        events = self.query_events(start_datetime, end_datetime)
+        if not events:
+            print(f"No events found for {start_datetime}-{end_datetime}")
+            return
+        categories = self.categorize_events(events)
+        self.print_analysis(categories)
 
-    def input_date(self) -> str:
-        print("Select from one of the following input options:")
+    def audit_day(self):
+        self.set_tag_option()
+        start_date, end_date = self._date_inputter.input_day()
+        self._audit(start_date, end_date)
+
+    def audit_week(self):
+        self.set_tag_option()
+        print(self._audit_first_tag_only)
+        # audit week
+        start_datetime, end_datetime = self._date_inputter.input_week()
+        events = self.query_events(start_datetime, end_datetime)
+        if not events:
+            print(f"No events found for {start_datetime}-{end_datetime}")
+            return
+        categories = self.categorize_events(events)
+        self.print_analysis(categories)
+
+        # audit each day of the week
+        cur_datetime = start_datetime
+        while cur_datetime <= end_datetime:
+            cur_events = []
+            self._total_duration = SECS_IN_DAY
+            print(DAYS_OF_WEEK[cur_datetime.weekday()], cur_datetime.date())
+            for event in events:
+                if event["start"]["dateTime"].day == cur_datetime.day:
+                    cur_events.append(event)
+            categories = self.categorize_events(cur_events)
+            self.print_analysis(categories)
+            cur_datetime += timedelta(days=1)
+
+    def audit_datetime_range(self):
+        self.set_tag_option()
+        start_date, end_date = self._date_inputter.input_datetime_range()
+        self._audit(start_date, end_date)
+
+    def audit(self):
+        print("Select from one of the following audit options:")
         options = ["day", "week", "datetime range"]
         count = 1
         for option in options:
@@ -228,73 +314,19 @@ class DateInputter:
             count += 1
         option = input(f"Select a number 1-{len(options)}: ")
         if option == "1":
-            return self.input_day()
+            return self.audit_day()
         elif option == "2":
-            return self.input_week()
+            return self.audit_week()
         elif option == "3":
-            return self.input_datetime_range()
+            return self.audit_datetime_range()
         else:
             print("INVALID OPTION. TRY AGAIN.\n")
-            return self.input_date()
-
-    def input_day(self) -> tuple[datetime, datetime]:
-        date = input("Enter the day (YYYY-MM-DD). Press Enter for today:\n")
-        if not date:
-            date = datetime.now().strftime("%Y-%m-%d")
-        start_datetime = date + "T00:00:00-05:00"
-        end_datetime = date + "T23:59:59-05:00"
-        return start_datetime, end_datetime
-
-    def input_week(self) -> tuple[datetime, datetime]:
-        date = input(
-            "Enter the start day (YYYY-MM-DD) of the week. Press Enter for today:\n"
-        )
-        if not date:
-            date = datetime.now().strftime("%Y-%m-%d")
-        start_datetime = date + "T00:00:00-05:00"
-        date_obj = datetime.fromisoformat(date) + timedelta(days=6)
-        end_datetime = date_obj.strftime("%Y-%m-%d") + "T23:59:59-05:00"
-        return start_datetime, end_datetime
-
-    def input_datetime_range(self) -> tuple[datetime, datetime]:
-        start_date = input("Enter the start day (YYYY-MM-DD). Press Enter for today:\n")
-        if not start_date:
-            start_date = datetime.now().strftime("%Y-%m-%d")
-        start_time = input("Enter the start time (HH:MM): ")
-        if not start_time:
-            start_time = "00:00"
-        end_date = input("Enter the end date (YYYY-MM-DD): ")
-        if not end_date:
-            end_date = start_date
-        end_time = input("Enter the end time (HH:MM): ")
-        if not end_time:
-            end_time = "23:59"
-        start_datetime = f"{start_date}T{start_time}:00-05:00"
-        end_datetime = f"{end_date}T{end_time}:00-05:00"
-        return start_datetime, end_datetime
+            return self.audit()
 
 
 def main():
-    # choose analyzation settings
-    date_inputter = DateInputter()
-    start_date, end_date = date_inputter.input_date()
-    # audit the first tag only
-    print("audit the first tag only?")
-    audit_first_tag_only = input("Enter y/n: ")
-    if audit_first_tag_only.lower() in ["yes", "y"]:
-        audit_first_tag_only = True
-    else:
-        audit_first_tag_only = False
-
-    # audit the events
-    print("\nAnalyzing events from", start_date, "to", end_date)
-    gcal_auditor = GCalAuditor(audit_first_tag_only)
-    events = gcal_auditor.query_events(start_date, end_date)
-    if not events:
-        print(f"No events found for {start_date}-{end_date}")
-        return
-    categories = gcal_auditor.categorize_events(events)
-    gcal_auditor.print_analysis(categories)
+    gcal_auditor = GCalAuditor()
+    gcal_auditor.audit()
 
 
 if __name__ == "__main__":
