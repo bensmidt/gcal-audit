@@ -19,17 +19,17 @@ MINUTES_IN_HOUR = 60
 SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
 
 
-class GCalAnalyzer:
+class GCalAuditor:
 
-    def __init__(self, analyze_first_tag_only: bool = False):
-        """Initialize the Google Calendar Analyzer.
+    def __init__(self, audit_first_tag_only: bool = False):
+        """Initialize the Google Calendar Auditor.
 
         Parameters
         ----------
-        analyze_first_tag_only: bool
-            Whether to analyze only the first tag in the event description.
+        audit_first_tag_only: bool
+            Whether to audit only the first tag in the event description.
         """
-        self._analyze_first_tag_only = analyze_first_tag_only
+        self._audit_first_tag_only = audit_first_tag_only
         self._total_duration = None
 
     def authenticate_user(self) -> Credentials:
@@ -134,10 +134,10 @@ class GCalAnalyzer:
             return [event["summary"]]
 
         categories = []
-        # analyze first tag
-        if self._analyze_first_tag_only:
+        # audit first tag
+        if self._audit_first_tag_only:
             return [matches[0].split(",")[0].strip()]
-        # analyze all tags
+        # audit all tags
         for match in matches[0].split(","):
             categories.append(match.strip())
 
@@ -204,7 +204,7 @@ class GCalAnalyzer:
             print(f"| {col1} | {col2} | {col3} |")
         print(f"+{'-' * (len(title)-2)}+")
         # total
-        if self._analyze_first_tag_only:
+        if self._audit_first_tag_only:
             minutes = tracked_duration // SECS_IN_MINUTE
             hours = minutes // MINUTES_IN_HOUR
             minutes = minutes % MINUTES_IN_HOUR
@@ -278,23 +278,23 @@ def main():
     # choose analyzation settings
     date_inputter = DateInputter()
     start_date, end_date = date_inputter.input_date()
-    # analyze the first tag only
-    print("Analyze the first tag only?")
-    analyze_first_tag_only = input("Enter y/n: ")
-    if analyze_first_tag_only.lower() in ["yes", "y"]:
-        analyze_first_tag_only = True
+    # audit the first tag only
+    print("audit the first tag only?")
+    audit_first_tag_only = input("Enter y/n: ")
+    if audit_first_tag_only.lower() in ["yes", "y"]:
+        audit_first_tag_only = True
     else:
-        analyze_first_tag_only = False
+        audit_first_tag_only = False
 
-    # analyze the events
+    # audit the events
     print("\nAnalyzing events from", start_date, "to", end_date)
-    gcal_analyzer = GCalAnalyzer(analyze_first_tag_only)
-    events = gcal_analyzer.query_events(start_date, end_date)
+    gcal_auditor = GCalAuditor(audit_first_tag_only)
+    events = gcal_auditor.query_events(start_date, end_date)
     if not events:
         print(f"No events found for {start_date}-{end_date}")
         return
-    categories = gcal_analyzer.categorize_events(events)
-    gcal_analyzer.print_analysis(categories)
+    categories = gcal_auditor.categorize_events(events)
+    gcal_auditor.print_analysis(categories)
 
 
 if __name__ == "__main__":
