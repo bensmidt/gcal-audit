@@ -1,0 +1,23 @@
+[2024-06-05 12:36:32,690 Bens-Mac-Studio.local] __init__.py:autodetect:49 - INFO: file_cache is only supported with oauth2client<4.0.0
+[2024-06-05 12:36:32,697 Bens-Mac-Studio.local] discovery.py:method:1256 - DEBUG: URL being requested: GET https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin=2024-06-05T00%3A00%3A00-07%3A00&timeMax=2024-06-05T23%3A59%3A59-07%3A00&singleEvents=true&orderBy=startTime&fields=items%28start%2C+end%2C+summary%2C+description%29&alt=json
+[2024-06-05 12:36:33,098 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:00-5:00 Sleep
+[2024-06-05 12:36:33,098 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 5:00-5:30 Morning Routine
+[2024-06-05 12:36:33,098 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 5:30-6:55 Miru
+[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 7:00-8:25 Miru
+[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 8:30-10:00 Miru
+[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 10:00-11:55 Miru
+[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:00-0:20 Lunch
+[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:20-0:40 Miru
+[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:40-1:00 Nap
+[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 1:00-2:25 Miru
+[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 2:30-3:35 Miru
+[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 3:40-4:40 Miru
+[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 4:40-5:00 Travel
+[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 5:00-6:15 Lift
+[2024-06-05 12:36:33,100 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 6:15-6:30 Stretch
+[2024-06-05 12:36:33,100 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 6:30-6:50 Travel
+[2024-06-05 12:36:33,100 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 6:50-7:20 Dinner
+[2024-06-05 12:36:33,100 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 7:20-9:00 Learn
+[2024-06-05 12:36:33,100 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:00-9:15 Miru
+[2024-06-05 12:36:33,100 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:15-9:30 Nighttime Routine
+[2024-06-05 12:36:33,100 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:30-0:00 Sleep

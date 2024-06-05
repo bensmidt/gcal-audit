@@ -2,6 +2,7 @@
 import os.path
 from datetime import datetime, timedelta
 import logging
+import socket
 import re
 
 # 3rd party imports
@@ -27,8 +28,8 @@ class DateInputter:
         date = input("Enter the day (YYYY-MM-DD). Press Enter for today:\n")
         if not date:
             date = datetime.now().strftime("%Y-%m-%d")
-        start_datetime = date + "T00:00:00-05:00"
-        end_datetime = date + "T23:59:59-05:00"
+        start_datetime = date + "T00:00:00-07:00"
+        end_datetime = date + "T23:59:59-07:00"
         return (
             datetime.fromisoformat(start_datetime), datetime.fromisoformat(end_datetime)
         )
@@ -39,9 +40,9 @@ class DateInputter:
         )
         if not date:
             date = datetime.now().strftime("%Y-%m-%d")
-        start_datetime = date + "T00:00:00-05:00"
+        start_datetime = date + "T00:00:00-07:00"
         date_obj = datetime.fromisoformat(date) + timedelta(days=6)
-        end_datetime = date_obj.strftime("%Y-%m-%d") + "T23:59:59-05:00"
+        end_datetime = date_obj.strftime("%Y-%m-%d") + "T23:59:59-07:00"
         return (
             datetime.fromisoformat(start_datetime), datetime.fromisoformat(end_datetime)
         )
@@ -59,8 +60,8 @@ class DateInputter:
         end_time = input("Enter the end time (HH:MM): ")
         if not end_time:
             end_time = "23:59"
-        start_datetime = f"{start_date}T{start_time}:00-05:00"
-        end_datetime = f"{end_date}T{end_time}:00-05:00"
+        start_datetime = f"{start_date}T{start_time}:00-07:00"
+        end_datetime = f"{end_date}T{end_time}:00-07:00"
         return (
             datetime.fromisoformat(start_datetime), datetime.fromisoformat(end_datetime)
         )
@@ -121,8 +122,9 @@ class GCalAuditor:
                 service.events()
                 .list(
                     calendarId="primary",
-                    timeMin=start_datetime.strftime("%Y-%m-%d") + "T00:00:00-05:00",
-                    timeMax=end_datetime.strftime("%Y-%m-%d") + "T23:59:59-05:00",
+                    # 07:00 is Pacific Time, 05:00 is Central Time
+                    timeMin=start_datetime.strftime("%Y-%m-%d") + "T00:00:00-07:00",
+                    timeMax=end_datetime.strftime("%Y-%m-%d") + "T23:59:59-07:00",
                     singleEvents=True,
                     orderBy="startTime",
                     fields="items(start, end, summary, description)",
@@ -137,9 +139,12 @@ class GCalAuditor:
                 event["end"]["dateTime"] = datetime.fromisoformat(
                     event["end"]["dateTime"]
                 )
-                logging.debug("{}:{:02d}-{}:{:02d} {}".format(
-                    start_datetime.hour % 12, start_datetime.minute,
-                    end_datetime.hour % 12, end_datetime.minute, event["summary"]))
+                logging.info("{}:{:02d}-{}:{:02d} {}".format(
+                    event["start"]["dateTime"].hour % 12,
+                    event["start"]["dateTime"].minute,
+                    event["end"]["dateTime"].hour % 12,
+                    event["end"]["dateTime"].minute,
+                    event["summary"]))
             return events
 
         except HttpError as error:
@@ -330,4 +335,20 @@ def main():
 
 
 if __name__ == "__main__":
+    # ignore annoying logs from other libraries
+    logging.getLogger("urllib3").setLevel(logging.ERROR)
+    logging.getLogger("requests").setLevel(logging.ERROR)
+    logging.getLogger("google").setLevel(logging.ERROR)
+
+    logger = logging.getLogger()
+    fhandler = logging.FileHandler(filename="audit.log", mode="w")
+    format_str = (
+        f"[%(asctime)s {socket.gethostname()}] %(filename)s:%(funcName)s:%(lineno)s - %"
+        f"(levelname)s: %(message)s"
+    )
+    formatter = logging.Formatter(format_str)
+    fhandler.setFormatter(formatter)
+    logger.addHandler(fhandler)
+    logger.setLevel(logging.DEBUG)
+
     main()
