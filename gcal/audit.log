@@ -1,23 +1,125 @@
-[2024-06-05 12:36:32,690 Bens-Mac-Studio.local] __init__.py:autodetect:49 - INFO: file_cache is only supported with oauth2client<4.0.0
-[2024-06-05 12:36:32,697 Bens-Mac-Studio.local] discovery.py:method:1256 - DEBUG: URL being requested: GET https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin=2024-06-05T00%3A00%3A00-07%3A00&timeMax=2024-06-05T23%3A59%3A59-07%3A00&singleEvents=true&orderBy=startTime&fields=items%28start%2C+end%2C+summary%2C+description%29&alt=json
-[2024-06-05 12:36:33,098 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:00-5:00 Sleep
-[2024-06-05 12:36:33,098 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 5:00-5:30 Morning Routine
-[2024-06-05 12:36:33,098 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 5:30-6:55 Miru
-[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 7:00-8:25 Miru
-[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 8:30-10:00 Miru
-[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 10:00-11:55 Miru
-[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:00-0:20 Lunch
-[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:20-0:40 Miru
-[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:40-1:00 Nap
-[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 1:00-2:25 Miru
-[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 2:30-3:35 Miru
-[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 3:40-4:40 Miru
-[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 4:40-5:00 Travel
-[2024-06-05 12:36:33,099 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 5:00-6:15 Lift
-[2024-06-05 12:36:33,100 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 6:15-6:30 Stretch
-[2024-06-05 12:36:33,100 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 6:30-6:50 Travel
-[2024-06-05 12:36:33,100 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 6:50-7:20 Dinner
-[2024-06-05 12:36:33,100 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 7:20-9:00 Learn
-[2024-06-05 12:36:33,100 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:00-9:15 Miru
-[2024-06-05 12:36:33,100 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:15-9:30 Nighttime Routine
-[2024-06-05 12:36:33,100 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:30-0:00 Sleep
+[2024-06-08 13:30:23,991 Bens-Mac-Studio.local] __init__.py:autodetect:49 - INFO: file_cache is only supported with oauth2client<4.0.0
+[2024-06-08 13:30:23,999 Bens-Mac-Studio.local] discovery.py:method:1256 - DEBUG: URL being requested: GET https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin=2024-06-03T00%3A00%3A00-07%3A00&timeMax=2024-06-09T23%3A59%3A59-07%3A00&singleEvents=true&orderBy=startTime&fields=items%28start%2C+end%2C+summary%2C+description%29&alt=json
+[2024-06-08 13:30:24,501 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:00-4:00 Airport -> Home
+[2024-06-08 13:30:24,501 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 4:00-10:20 Sleep
+[2024-06-08 13:30:24,501 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 10:20-10:45 Morning Routine
+[2024-06-08 13:30:24,501 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 10:45-11:05 Admin
+[2024-06-08 13:30:24,501 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 11:05-11:30 Clear Email
+[2024-06-08 13:30:24,501 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 11:30-1:15 Fix Calendar / Plan Week
+[2024-06-08 13:30:24,501 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 1:15-2:05 Unpack, Laundry, Car Files
+[2024-06-08 13:30:24,501 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 2:05-2:25 To-Do List
+[2024-06-08 13:30:24,501 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 2:25-3:05 Lunch
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 3:05-3:30 Gokul Hari Call Review
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 3:30-4:40 Nap
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 4:45-5:05 Gokul Hari Call Review
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 5:05-5:45 Akshay Moharir Call Review
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 5:45-6:00 Misc. (unhelpful) Call Reviews
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 6:00-6:10 Pawan Yadav Call Review
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 6:10-7:10 Assemble Pull-Up Bar
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 7:10-7:30 Dinner
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 7:30-7:50 Biju Call
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 7:50-8:05 Dinner
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 8:05-9:00 Daily Debrief
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:00-9:15 Daily Debrief
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:15-10:10 Hang Whiteboards / Decorations
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 10:10-10:50 Nighttime Routine
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 10:50-11:30  Laundry
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 11:30-0:00 Sleep
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:00-9:10 Sleep
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:10-10:00 Morning Routine
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 10:00-10:15 Summer Robotics Call Review
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 10:20-10:35 Sameer Malik Call Review
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 10:35-10:50 Iswarya Alex Call Review / Mark Notion Duplicates
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 10:50-11:05 Usman Khan Call Review
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 11:10-11:45 Robotic Company Research
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 11:45-0:30 Lunch
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:30-1:00 Harjatin Baweja Call
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 1:00-1:25 Sarthak Shetty Call
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 1:30-1:50 MVP Meeting
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 1:50-2:30 Email, Finances, Insurance
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 2:30-3:00 Order Groceries
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 3:00-3:10 Josh / Rob User Call
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 3:20-3:45 Panos Moutafis Call Review
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 3:45-4:10 Akash James Call Review
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 4:10-4:20 Eric Rader Call Review
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 4:35-4:50 Rakshith Singh Call Review
+[2024-06-08 13:30:24,502 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 4:50-5:05  Diligent Call Review
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 5:05-5:10 Harika Call Review
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 5:10-5:15 Harika Call Review
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 5:20-5:45 Shrijit Singh Call Review
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 5:45-6:15 Talk with Mel/V
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 6:15-6:40 Chaitanya Krishna Call Review
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 6:40-6:50 Pick Up Groceries
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 6:50-7:25 Dinner
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 7:25-7:50 Jaggennath Hari Call Review
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 7:50-8:20 Sarthak Shetty Call Review
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 8:20-8:55 MVP Synthesis
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:00-9:15 Daily Debrief
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:15-9:35 Ramana Kiran Call Review
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:35-10:00 Caine Ardayfio Call Review
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 10:00-10:30 Nighttime Routine
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 10:30-0:00 Sleep
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:00-7:55 Sleep
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 7:55-8:40 Morning Routine
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 8:40-9:10 Manpreet Sing (1) Call Review
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:10-9:40 Panos Moutafis (2) Call Review
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:45-10:05 Panos Moutafis (2) Call Review
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 10:05-10:25 Venkata Ganti (2) Call Review
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 10:30-11:00 Shubhm Baid (2) Call Review
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 11:00-11:20 Fix User Research Notion
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 11:20-11:50 Manpreet Singh (2) Call Review
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 11:50-0:00 Utkarsh Deshmukh (2) Call Review
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:00-0:20 Lunch
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:20-0:40 Admin
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:40-1:00 Breathing Treatment
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 1:10-1:55 Utkarsh Deshmukh Call Review
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 1:55-2:20 Karan Mahesh (2) Call Review
+[2024-06-08 13:30:24,503 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 2:25-2:50 Rakshith Singh (2) Call Review
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 2:55-3:05 Rakshith Singh (2) Call Review
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 3:15-3:30 Naitri Call Review
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 3:30-3:50 Talk with Mel/V
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 3:50-4:10 Harjatin Baweja (2) Call Review
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 4:15-4:30 Sarthak Shetty (2) Call Review
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 4:30-5:05 Bijju Kranthi (2) Call Review
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 5:05-5:30 Dinner
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 5:45-6:00 Talk with Mel/V
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 6:00-6:50 MVP Spec
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 7:05-10:10 MVP Spec Meeting
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 10:10-10:30 Nighttime Routine
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 10:30-0:00 Sleep
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:00-6:30 Sleep
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 6:30-7:00 Morning Routine
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 7:10-9:05 MVP Spec Meeting
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:15-10:35 MVP Spec Meeting
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 10:35-11:15 Lunch
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 11:15-0:10 MVP Spec Meeting
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:20-1:25 Reimbursement / Roles / Culture Meeting
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 2:00-6:00 Miru
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 6:00-6:30 Meal Prep / Laundry
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 6:30-7:30 Learn
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 7:30-7:45 Meal Prep / Laundry
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 7:45-8:45 Learn
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 8:45-9:15 Meal Prep / Laundry
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:15-9:30 Nighttime Routine
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:30-0:00 Sleep
+[2024-06-08 13:30:24,504 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:00-5:00 Sleep
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 5:00-5:30 Morning Routine
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 5:30-6:55 Miru
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 7:00-8:25 Miru
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 8:30-10:00 Miru
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 10:00-11:55 Miru
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:00-0:20 Lunch
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:20-0:40 Admin
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 0:40-1:00 Nap
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 1:00-2:25 Miru
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 2:30-3:35 Miru
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 3:40-4:40 Miru
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 4:45-5:00 Meeting Prep
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 5:00-6:00 Weekly Meeting
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 6:00-6:40 Goals / Habits / Time Review
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 6:40-7:00 Meditate
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 7:00-7:45 Call People
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 7:45-9:00 Learn
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:00-9:15 Daily Debrief
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:15-9:30 Nighttime Routine
+[2024-06-08 13:30:24,505 Bens-Mac-Studio.local] audit.py:query_events:142 - INFO: 9:30-0:00 Sleep

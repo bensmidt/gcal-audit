@@ -301,6 +301,10 @@ class GCalAuditor:
             for event in events:
                 if event["start"]["dateTime"].day == cur_datetime.day:
                     cur_events.append(event)
+            if not cur_events:
+                print(f"No events found for {cur_datetime}")
+                cur_datetime += timedelta(days=1)
+                continue
             categories = self.categorize_events(cur_events)
             self.print_analysis(categories)
             cur_datetime += timedelta(days=1)
