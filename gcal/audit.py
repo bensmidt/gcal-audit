@@ -226,9 +226,9 @@ class GCalAuditor:
         col2 = f"{'Duration':^8}"
         col3 = f"{'% of Total':^10}"
         title = f"| {col1} | {col2} | {col3} |"
-        print(f"+{'-' * (len(title)-2)}+")
+        print(f"+{'-' * (len(title) - 2)}+")
         print(title)
-        print(f"+{'-' * (len(title)-2)}+")
+        print(f"+{'-' * (len(title) - 2)}+")
         # data
         tracked_duration = 0
         for event_type, seconds in categories.items():
@@ -242,7 +242,7 @@ class GCalAuditor:
             col2 = f"{duration:^8}"
             col3 = f"{percent_of_total:^10}"
             print(f"| {col1} | {col2} | {col3} |")
-        print(f"+{'-' * (len(title)-2)}+")
+        print(f"+{'-' * (len(title) - 2)}+")
         # total
         if self._audit_first_tag_only:
             minutes = tracked_duration // SECS_IN_MINUTE
@@ -256,7 +256,7 @@ class GCalAuditor:
             col2 = f"{duration:^8}"
             col3 = f"{percent_of_total:^10}"
             print(f"| {col1} | {col2} | {col3} |")
-            print(f"+{'-' * (len(title)-2)}+")
+            print(f"+{'-' * (len(title) - 2)}+")
 
     def set_tag_option(self):
         # audit the first tag only
